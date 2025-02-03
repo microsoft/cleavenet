@@ -1,0 +1,25 @@
+name: cleavenet
+channels:
+  - defaults
+dependencies:
+  - spyder
+  - scikit-learn
+  - matplotlib
+  - pandas
+  - xlrd
+  - mpld3
+  - jupyter
+  - pip
+  - ipykernel
+  - pip:
+      - seaborn
+      - logomaker
+      - tqdm
+      - itables
+      - seqlogo
+      - umap
+      - peptides
+      - jellyfish
+      - matplotlib
+      - seaborn
+prefix: /home/sarahalamdari/miniconda3/envs/cleavenet
