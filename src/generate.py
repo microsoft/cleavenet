@@ -54,7 +54,7 @@ if args.z_scores is not None:
     assert ([mmp in cond_z_scores.columns for mmp in mmps])
     cond_z_scores = cond_z_scores[mmps]
     for mmp in mmps:
-        cond_z_scores[mmp] = cond_z_scores[mmp].apply(lambda x: custom_round(x, base=0.5))  # round to nearest 0.5
+        cond_z_scores[mmp] = cond_z_scores[mmp].apply(lambda x: custom_round(x, base=0.1))  # round to nearest 0.1
     conditioning_tag = cond_z_scores.values.tolist()
 else:
     conditioning_tag = [[start_id]] # unconditional generation

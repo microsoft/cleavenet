@@ -713,6 +713,8 @@ def inference(model, dataloader, causal=False, seq_len=10, penalty=1, verbose=Fa
 
 
 def prediction(data_path_kukreja, gen_data, generated_dir, true_zscores=None, true_mmps=None, checkpoint_dir='save/', predictor_model_type='transformer', number_top_candidates=50):
+    if not os.path.exists(generated_dir):
+        os.mkdir(generated_dir)
     if predictor_model_type == 'transformer':
         ensembles = ['transformer_0/',
                  'transformer_1/',
@@ -811,3 +813,47 @@ def prediction(data_path_kukreja, gen_data, generated_dir, true_zscores=None, tr
         plotter.confidence_ranked_scatter_z(scores, generated_dir, m, threshold=confidence_threshold)
 
     return means, std
+
+
+def predict_scores_simple(substrates, checkpoint_dir='../weights/', save_dir='outputs/', model_architecture='transformer'):
+    data_dir = cleavenet.utils.get_data_dir()
+    data_path = os.path.join(data_dir, "kukreja.csv")
+    pred_zscores, std_zscores = cleavenet.models.prediction(data_path,
+                                                            substrates,
+                                                            save_dir,
+                                                            predictor_model_type=model_architecture,
+                                                            checkpoint_dir=checkpoint_dir)
+    return pred_zscores, std_zscores
+
+def simple_inference(num_seqs, repeat_penalty, temperature):
+    data_dir = cleavenet.utils.get_data_dir()
+    data_path = os.path.join(data_dir, "kukreja.csv")
+    kukreja = cleavenet.data.DataLoader(data_path, seed=0, task='generator', model='autoreg', test_split=0.2,
+                                                dataset='kukreja')
+    # From dataloader get necessary variables
+    start_id = kukreja.char2idx[kukreja.START]
+    # Load model
+    model, checkpoint_path = cleavenet.models.load_generator_model(model_type='transformer',
+                                                                   training_scheme='rounded')
+    # Fake run to load data and build model
+    conditioning_tag_fake = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+    generated_seq = cleavenet.models.inference(model, kukreja, causal=True, seq_len=11,
+                                               penalty=1, # no penalty
+                                               verbose=False,
+                                               conditioning_tag=conditioning_tag_fake,
+                                               temperature=1 # no temp
+                                               )
+    conditioning_tag = [[start_id]] # unconditional generation
+    untokenized_seqs = []
+    for i in range(len(conditioning_tag)):
+        for j in range(num_seqs):
+            model.built=True
+            model.load_weights(checkpoint_path)  # Load model weights
+            # Generate using loaded weights
+            generated_seq = cleavenet.models.inference(model, kukreja, causal=True, seq_len=11,
+                                                       penalty=repeat_penalty,
+                                                       verbose=False,
+                                                       conditioning_tag=[conditioning_tag[i]], temperature=temperature)
+            #tokenized_seqs.append(generated_seq)
+            untokenized_seqs.append(''.join(kukreja.idx2char[generated_seq]))
+    return untokenized_seqs
