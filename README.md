@@ -1,9 +1,6 @@
 ### TODO 
 * update preprint link
-* link to notebook that installs/runs on CPU 
-* add to pip
 * decide if submitting CELA release for splits 
-
 
 # CleaveNet
 
@@ -19,7 +16,7 @@ classes.
 
 <p align="center">
 <img src="img/fig1_predictor_only.png" width="290" />
-<img src="img/fig1_generator_only.png" width="500" />
+<img src="img/fig1_generator_only.png" width="505" />
 </p>
 
 Below we provide documentation on training, evaluating, and generating from CleaveNet. 
@@ -42,22 +39,24 @@ CleaveNet is described in this [preprint](https://www.biorxiv.org/content/); if 
 ----
 
 ## Jupyter notebook
-To get started quickly - we have put together a jupyter notebook that simplifies the code base. We recommend starting here if you are less familiar with setting up and using a python package.
-To use this notebook you should not need to install any external packages, but it also has reduced functionality. 
+To get started quickly we have put together a [jupyter notebook](notebooks/CleaveNet_Example.ipynb) that simplifies using the code for substrate cleavage prediction, and unconditional substrate generation. We recommend starting here if you are less familiar with setting up and using a python package.
+
 
 ----
 ## Getting Started 
 ### Installation
 
-To download our code, we recommend creating a clean environment with python ```v3.8```, and installing tensorflow2 
+To download our code, we recommend creating a clean environment with python ```v3.8```, and installing `tensorflow2`. 
 ```
-conda create --name cleavenet python=3.8
+conda env create --name cleavenet python=3.8
 conda activate cleavenet 
-conda env update -f environment_no-builds.yml # TODO fix name of this 
 ```
-In that new environment, install CleaveNet: 
+Install CleaveNet using: 
 ```
 pip install cleavenet
+```
+Or, for bleeding edge installation use: 
+```
 pip install git+https://github.com/microsoft/cleavenet.git # bleeding edge, current repo main branch
 ```
 
@@ -102,7 +101,9 @@ python src/train_generator.py
 
 * The generator model is autoregressive trained over both conditional inputs (Z-scores included), and unconditional (sequence-only), next token prediction as described in the paper. 
 
-By default, these scripts will use the training splits in `splits/` if present. If splits are not present it will create a new training split from `data/kukreja.csv`. If you want to use your own data, we suggest either formatting new data similar to `kukreja.csv` and passing it through the dataloader, or writing a compatible custom DataLoader. See `cleavenet/data.py` for an example.
+## Data 
+
+By default, these scripts will use the training splits in `splits/` if present. If splits are not present it will create a new training split from `data/kukreja.csv`. This file was obtained from [Kukreja et. al., 2015](https://www.sciencedirect.com/science/article/pii/S1074552115002574?via%3Dihub) and converted to a csv file. If you want to use your own data, we suggest either converting your data into csv format as `kukreja.csv` and passing it through the CleaveNet dataloader, or writing a compatible custom DataLoader. See `cleavenet/data.py` for an example.
 
 ## CleaveNet Predictor
 ### Substrate screeing with CleaveNet Predictor
