@@ -9,7 +9,7 @@ def parse_requirements(filename):
 
 setuptools.setup(
     name="cleavenet", # Replace with your own username
-    version="0.1.1",
+    version="0.1.0",
     description="Deep learning model for substrate cleavage prediction and generation",
     long_description=long_description,
     long_description_content_type="text/markdown",

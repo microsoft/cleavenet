@@ -118,11 +118,10 @@ def exact_match(sequences, dataloader):
     ensemble: pick 1 run
     """
     x_train = dataloader.X # use all not just train here
-    s1 = 'GGPQGIWGQC' # Z1 peptide - additional comparison
 
     dist_array = np.zeros((len(sequences), len(x_train)))
     active_array = np.zeros((len(sequences), len(x_train)))
-    s_array = np.zeros((len(sequences)))
+    #s_array = np.zeros((len(sequences)))
 
     exact_match_freq = []
     active_match_freq = []
@@ -130,7 +129,7 @@ def exact_match(sequences, dataloader):
     for i in range(len(sequences)):
         full_matches = 0
         active_matches = 0
-        s_array[i] = jellyfish.levenshtein_distance(sequences[i], s1)
+        #s_array[i] = jellyfish.levenshtein_distance(sequences[i], s1)
         for j in range(len(x_train)):
             active_array[i, j] = jellyfish.levenshtein_distance(sequences[i][2:7], x_train[j][2:7])
             dist_array[i, j] = jellyfish.levenshtein_distance(sequences[i], x_train[j])
@@ -142,7 +141,7 @@ def exact_match(sequences, dataloader):
             active_matches+=len(index_a)
         exact_match_freq.append(full_matches)
         active_match_freq.append(active_matches)
-    return exact_match_freq, active_match_freq, s_array
+    return exact_match_freq, active_match_freq #, s_array
 
 
 def eval_all_mmp(means, x_all, dataloader, save_path, z_score_cutoff=0):
@@ -223,7 +222,7 @@ def get_roc_data(y, y_hat, true_z_cutoff=2, width=0.1):
             else:
                 return 'TN'
         df['class'] = df.apply(conditions, axis=1)
-        print(df.head())
+        #(df.head())
         tp = (df['class'] == 'TP').sum()
         fn = (df['class'] == 'FN').sum()
         tn = (df['class'] == 'TN').sum()
