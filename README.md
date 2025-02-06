@@ -1,8 +1,3 @@
-### TODO 
-* update preprint link
-* decide if submitting CELA release for splits  
-* waiting on release pre-approval from Microsoft open source 
-* RAI is reviewing model card, waiting on them to send an impact assesment to complete 
 # CleaveNet
 
 CleaveNet is an end-to-end AI pipeline for the design of protease substrates. Applied to matrix metalloproteinases, 
