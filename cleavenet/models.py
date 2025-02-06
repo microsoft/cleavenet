@@ -712,7 +712,7 @@ def inference(model, dataloader, causal=False, seq_len=10, penalty=1, verbose=Fa
     return generated_seq
 
 
-def prediction(data_path_kukreja, gen_data, generated_dir, true_zscores=None, true_mmps=None, checkpoint_dir='save/', predictor_model_type='transformer', number_top_candidates=50):
+def prediction(data_path_kukreja, gen_data, generated_dir, true_zscores=None, true_mmps=None, checkpoint_dir='weights/', predictor_model_type='transformer', number_top_candidates=50):
     if not os.path.exists(generated_dir):
         os.mkdir(generated_dir)
     if predictor_model_type == 'transformer':

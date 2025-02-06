@@ -127,7 +127,6 @@ def main():
         @tf.function  # comment out for eager execution (if you want to debug)
         def train_step(x, y):
             with tf.GradientTape() as tape:
-                model.reset_states()
                 y_hat = model(x, training=True)  # forward pass
                 loss = model.compute_loss(y, y_hat)  # compute loss
             grads = tape.gradient(loss, model.trainable_variables)  # compute gradient
@@ -177,7 +176,6 @@ def main():
 
             if epoch > 0:  # run validation every epoch
                 print("Running validation")
-                model.reset_states()
                 vbar = tqdm(range(len(X_valid) // args.batch_size))
                 val_loss = []
                 val_rmse = []
@@ -199,7 +197,7 @@ def main():
                         print(f"Saving with val loss: {val_loss:.4f}")
                         print(f"Val rmse: {val_rmse:.4f}")
                         model.save_weights(os.path.join(save_dir, \
-                                                        "{}.h5".format("model")))
+                                                        "{}.weights.h5".format("model")))
                         best_val_loss = val_loss
 
                 ## run bhatia validation
@@ -219,7 +217,7 @@ def main():
                         print(f"Saving with bhatia val loss: {b_val_loss:.4f}")
                         print(f"bhatia Val rmse: {b_val_rmse}")
                         model.save_weights(os.path.join(save_dir, \
-                                                        "{}.h5".format("best-bhatia-model")))
+                                                        "{}.weights.h5".format("best-bhatia-model")))
                         best_b_val_loss = b_val_loss
 
         save_file = save_dir + '/best_loss.csv'
@@ -231,7 +229,7 @@ def main():
         # After training assess performance of trained model in full set of test data
         # using load model here so we can use the best checkpoint
         ensemble_dir = save_dir
-        checkpoint_path_final = os.path.join(ensemble_dir, "model.h5")
+        checkpoint_path_final = os.path.join(ensemble_dir, "model.weights.h5")
 
         # Re-build the predictor model
         if args.model_type == 'lstm':

@@ -47,6 +47,7 @@ kukreja = cleavenet.data.DataLoader(data_path, seed=0, task='generator', model='
 k_pred_zscores, k_std_zscores = cleavenet.models.prediction(data_path,
                                                             eval_sequences,
                                                             args.save_dir,
+                                                            checkpoint_dir='weights/',
                                                             predictor_model_type=args.model_architecture,
                                                             true_zscores=true_scores,
                                                             true_mmps=true_mmps)

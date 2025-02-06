@@ -57,11 +57,10 @@ def save_to_dataframe(x_all, y_all, mmp_idx, y_hat_all, uncertainty, z_cutoff=0,
             save_file2 = '_weighted_top'+str(top)+'_cleaved.csv'
             scores_sorted = scores.sort_values(by=['Pred Z-scores'], ascending=False)[:top]
         if find_matches:
-            exact_match_freq, active_match_freq, s_lev = exact_match(list(scores_sorted.index), dataloader)
+            exact_match_freq, active_match_freq = exact_match(list(scores_sorted.index), dataloader)
             # save all to dataframe
             scores_sorted['exact matches'] = exact_match_freq
             scores_sorted['exact active'] = active_match_freq
-            scores_sorted['lev to z1'] = s_lev
         scores_sorted['mmp'] = [mmp] * len(scores_sorted)
         scores_sorted.to_csv(os.path.join(save_path, mmp+save_file1))
 
@@ -82,11 +81,10 @@ def save_to_dataframe(x_all, y_all, mmp_idx, y_hat_all, uncertainty, z_cutoff=0,
         else:
             weighted_scores_sorted = scores_weighted.sort_values(by=['Weighted Z-scores'], ascending=False)[:top]
         if find_matches:
-            exact_match_freq, active_match_freq, s_lev = exact_match(list(weighted_scores_sorted.index), dataloader)
+            exact_match_freq, active_match_freq  = exact_match(list(weighted_scores_sorted.index), dataloader)
             # save all to dataframe
             weighted_scores_sorted['exact matches'] = exact_match_freq
             weighted_scores_sorted['exact active'] = active_match_freq
-            weighted_scores_sorted['lev to z1'] = s_lev
         weighted_scores_sorted['mmp'] = [mmp] * len(weighted_scores_sorted)
         weighted_scores_sorted.to_csv(os.path.join(save_path, mmp + save_file2))
 
