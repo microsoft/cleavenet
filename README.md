@@ -99,7 +99,7 @@ python src/train_generator.py
 
 ### Datasets
 
-By default, these scripts will use the training splits in `splits/` if present. If splits are not present it will create a new training split from `data/kukreja.csv`. This file was obtained from [Kukreja et. al., 2015](https://www.sciencedirect.com/science/article/pii/S1074552115002574?via%3Dihub) and converted to a csv file. If you want to use your own data, we suggest either converting your data into csv file formatted as `kukreja.csv` and passing it through the CleaveNet dataloader, or writing a compatible custom DataLoader. See `cleavenet/data.py` for an example.
+By default, these scripts will use the training splits in `splits/` if present. If splits are not present it will create a new training split from `data/kukreja.csv`. This file was obtained from [Kukreja et. al., 2015](https://www.sciencedirect.com/science/article/pii/S1074552115002574?via%3Dihub) and converted to a csv file. If you want to use your own data, we suggest either converting your data into csv file and passing it through the CleaveNet dataloader, or writing a compatible custom DataLoader. See `cleavenet/data.py` for an example.
 
 ----
 
