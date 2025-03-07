@@ -18,7 +18,7 @@ classes.
 Below we provide documentation on training, evaluating, and generating from CleaveNet. 
 
 ### Citation
-CleaveNet is described in this [preprint](https://www.biorxiv.org/content/); if you use the code from this repository or the results, please cite the preprint.
+CleaveNet is described in this [preprint]([https://www.biorxiv.org/content/](https://www.biorxiv.org/content/10.1101/2025.02.27.640681v1.abstract)); if you use the code from this repository or the results, please cite the preprint.
 
 ----
 ## Table of contents
