@@ -25,13 +25,13 @@ CleaveNet is described in this [preprint](https://www.biorxiv.org/content/10.110
 
 - [CleaveNet](#cleavenet)
 - [Table of contents](#table-of-contents)
-- [Quick Setup](#quick-setup)
-- [Getting Started](#getting-started-)
+- [Quick Setup](#jupyter-notebook)
+- [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Project structure](#project-structure)
-- [Training models](#training-)
+- [Training models](#training)
 - [Predicting cleavage](#cleavenet-predictor)
-- [Generating protease substrates](#cleavenet-generator-)
+- [Generating protease substrates](#cleavenet-generator)
 ----
 
 ## Jupyter notebook
@@ -39,7 +39,7 @@ To get started quickly we have put together a [jupyter notebook](notebooks/Cleav
 
 
 ----
-## Getting Started 
+## Getting Started
 ### Installation
 
 To download our code, we recommend creating a clean environment with python ```v3.8```, and installing `tensorflow2`. 
@@ -60,8 +60,7 @@ pip install git+https://github.com/microsoft/cleavenet.git # bleeding edge, curr
 ```
 ├── README.md
 ├── cleavenet/                          ~ package functions
-├── data/                               
-    ├── kukreja.csv                     ~ raw dataset as csv file           
+├── data/                                         
     ├── cleavenet_design.txt            ~ sequences and controls tested; sequences only
     ├── cleavenet_design_summary.xlsx   ~ sequences and controls tested; MMP13 predicted Z-score, in vitro eff and selectivity
 ├── examples/                           ~ example data needed to run test code in README.md      
@@ -83,7 +82,7 @@ pip install git+https://github.com/microsoft/cleavenet.git # bleeding edge, curr
 ```
 ----
 
-## Training 
+## Training
 To train CleaveNet predictor: 
 
 ```
@@ -160,7 +159,7 @@ The flag `--no-csv-header` assumes the csv file contains no header information, 
 
 ----
 
-## CleaveNet Generator 
+## CleaveNet Generator
 ### Unconditional substrate generation
 To generate protein sequences unconditionally using the CleaveNet generator run the following script: 
 ```
