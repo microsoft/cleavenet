@@ -60,7 +60,8 @@ pip install git+https://github.com/microsoft/cleavenet.git # bleeding edge, curr
 ```
 ├── README.md
 ├── cleavenet/                          ~ package functions
-├── data/                                         
+├── data
+    ├── kukreja.csv                     ~ dataset used for training/testing
     ├── cleavenet_design.txt            ~ sequences and controls tested; sequences only
     ├── cleavenet_design_summary.xlsx   ~ sequences and controls tested; MMP13 predicted Z-score, in vitro eff and selectivity
 ├── examples/                           ~ example data needed to run test code in README.md      
