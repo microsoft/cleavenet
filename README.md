@@ -35,7 +35,7 @@ CleaveNet is described in this [preprint](https://www.biorxiv.org/content/10.110
 ----
 
 ## Jupyter notebook
-To get started quickly we have put together a [jupyter notebook](notebooks/CleaveNet_Example.ipynb) that simplifies using the code for substrate cleavage prediction, and unconditional substrate generation. We recommend starting here if you are less familiar with setting up and using a python package.
+To get started quickly we have put together a [jupyter notebook](notebooks/CleaveNet_Example.ipynb) that simplifies using the code for substrate cleavage prediction, and unconditional substrate generation. We recommend starting here if you are less familiar with setting up and using a python package. It should take around 3-5 min to run the install line, and less than 20 minutes to execute the entire notebook using CPUs. A GPU will speed up inference for both the predictor and generator model.  
 
 
 ----
@@ -150,13 +150,14 @@ python src/predict.py --path-to-sequence-csv splits/kukreja/X_test.csv \
                       --no-csv-header
                       --save-dir outputs/kukreja_test
 ```
-The flag `--no-csv-header` assumes the csv file contains no header information, and will assign each column to the MMPs used to create the splits, and used during training. This flag is not necessary for most use cases, and should be used with caution.
+The flag `--no-csv-header` assumes the csv file contains no header information, and will assign each column to the MMPs used to create the splits, and used during training. This flag is not necessary for most use cases, and should be used with caution. 
 
 
 **Notes:**  
 * The model has not been robustly evaluated on sequences shorter or longer than 10 residues 
 * The default CleaveNet predictor model uses a transformer. Using the Transformer default should be sufficient for most use cases. 
-* In the paper we describe how in some cases an LSTM backbone can extrapolate better to unseen protease cleavage patterns. To instead use the baseline LSTM model for cleavage prediction add the flag `--model-architecture lstm` to `src/predict.py`. 
+* In the paper we describe how in some cases an LSTM backbone can extrapolate better to unseen protease cleavage patterns. To instead use the baseline LSTM model for cleavage prediction add the flag `--model-architecture lstm` to `src/predict.py`.
+
 
 ----
 
