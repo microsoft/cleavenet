@@ -1,4 +1,5 @@
-# CleaveNet
+# CleaveNet 
+[![DOI](https://zenodo.org/badge/924786542.svg)](https://doi.org/10.5281/zenodo.17662980)
 
 CleaveNet is an end-to-end AI pipeline for the design of protease substrates. Applied to matrix metalloproteinases, 
 CleaveNet enhances the scale, tunability, and efficiency of substrate design. CleaveNet generates peptide substrates 
